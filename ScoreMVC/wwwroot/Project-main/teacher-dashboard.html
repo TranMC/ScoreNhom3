@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/students.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1>Teacher Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <span id="teacherName"></span>
+            <button class="btn btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <ul>
+                <li data-page="dashboard">
+                    <a href="#dashboard"><i class="fas fa-home"></i> Tổng quan</a>
+                </li>
+                <li data-page="scores">
+                    <a href="#scores"><i class="fas fa-edit"></i> Nhập điểm</a>
+                </li>
+                <li data-page="schedule">
+                    <a href="#schedule"><i class="fas fa-calendar-alt"></i> Lịch giảng dạy</a>
+                </li>
+                <li data-page="students">
+                    <a href="#students"><i class="fas fa-user-graduate"></i> Học sinh</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="dashboard">
+            <div id="pageContent">
+                <!-- Nội dung sẽ được load động -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts - Thay đổi thứ tự load -->
+    <script src="js/auth.js"></script>
+    <script src="js/data-service.js"></script>
+    <script src="js/students.js"></script>
+    <script src="js/scores.js"></script>
+    <script src="js/teacher-dashboard.js"></script>
+    <script src="js/navigation.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const teacher = checkTeacherAuth();
+            if (!teacher) {
+                window.location.href = 'login.html';
+            }
+            initializeDashboardData();
+        });
+    </script>
+</body>
+</html> 
